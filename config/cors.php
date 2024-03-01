@@ -21,6 +21,8 @@ return [
 
     'allowed_origins' => ['*'],
 
+    // 'allowed_origins' => [env('APP_FRONTEND_URL', 'http://127.0.0.1:8000')],
+
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
