@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -25,6 +26,20 @@ class ProjectController extends Controller
         return response()->json([
             'succes' => true,
             'project' => $project,
+        ]);
+    }
+
+    public function projects_type($slug)
+    {
+        $projects = DB::table('projects')
+            ->join('types', 'types.id', '=', 'projects.type_id')
+            ->select('projects.*', 'types.slug as typeSlug')
+            ->where('types.slug', $slug)
+            ->get();
+
+        return response()->json([
+            'succes' => true,
+            'results' => $projects,
         ]);
     }
 }
